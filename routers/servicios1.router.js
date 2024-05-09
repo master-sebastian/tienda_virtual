@@ -4,6 +4,8 @@ const faker = require("faker");
 
 const router = express.Router();
 
+//Estados http: https://http.cat/
+
 router.get("/msg/:id/:code", (req, res)=> {
     //Params en ruta
     const { id, code } = req.params;
@@ -11,7 +13,7 @@ router.get("/msg/:id/:code", (req, res)=> {
     //Query params en ruta
     const { msg } = req.query;
 
-    res.json({
+    res.status(200).json({
         msg: msg, 
         id : id,
         code: code,
@@ -25,7 +27,7 @@ router.get("/msg/:id/:code", (req, res)=> {
 
 router.post("/msg/", (req, res)=> {
     const {id, msg, code } = req.body;
-    res.json({
+    res.status(201).json({
         msg: msg, 
         id : id,
         code: code,
@@ -41,7 +43,7 @@ router.put("/msg/:id", (req, res)=> {
     const { id } = req.params;
     const { code } = req.query;
     const { msg } = req.body;
-    res.json({
+    res.status(200).json({
         msg: msg, 
         id : id,
         code: code,
@@ -56,7 +58,7 @@ router.patch("/msg/:id", (req, res)=> {
     const { id } = req.params;
     const { code } = req.query;
     const { msg } = req.body;
-    res.json({
+    res.status(201).json({
         msg: msg, 
         id : id,
         code: code,
@@ -70,7 +72,7 @@ router.patch("/msg/:id", (req, res)=> {
 
 router.delete("/msg/:id", (req, res)=> {
     const { id } = req.params;
-    res.json({
+    res.status(200).json({
         id : id,
         action: "Deleted"
     });
