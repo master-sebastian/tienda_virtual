@@ -17,21 +17,62 @@ router.get("/msg/:id/:code", (req, res)=> {
         code: code,
         name: faker.commerce.productName(),
         price: parseFloat(faker.commerce.price(), 10),
-        image: faker.image.imageUrl()
+        image: faker.image.imageUrl(),
+        action: "Read"
     });
 });
 
 
 router.post("/msg/", (req, res)=> {
     const {id, msg, code } = req.body;
-
     res.json({
         msg: msg, 
         id : id,
         code: code,
         name: faker.commerce.productName(),
         price: parseFloat(faker.commerce.price(), 10),
-        image: faker.image.imageUrl()
+        image: faker.image.imageUrl(),
+        action: "Created"
+    });
+});
+
+
+router.put("/msg/:id", (req, res)=> {
+    const { id } = req.params;
+    const { code } = req.query;
+    const { msg } = req.body;
+    res.json({
+        msg: msg, 
+        id : id,
+        code: code,
+        name: faker.commerce.productName(),
+        price: parseFloat(faker.commerce.price(), 10),
+        image: faker.image.imageUrl(),
+        action: "Updated put"
+    });
+});
+
+router.patch("/msg/:id", (req, res)=> {
+    const { id } = req.params;
+    const { code } = req.query;
+    const { msg } = req.body;
+    res.json({
+        msg: msg, 
+        id : id,
+        code: code,
+        name: faker.commerce.productName(),
+        price: parseFloat(faker.commerce.price(), 10),
+        image: faker.image.imageUrl(),
+        action: "Updated patch"
+    });
+});
+
+
+router.delete("/msg/:id", (req, res)=> {
+    const { id } = req.params;
+    res.json({
+        id : id,
+        action: "Deleted"
     });
 });
 
