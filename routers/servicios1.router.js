@@ -2,6 +2,10 @@ const express = require('express');
 
 const faker = require("faker");
 
+
+const ElementsService = require('./../services/ElementsServices.service');
+const elementService = new ElementsService();
+
 const router = express.Router();
 
 //Estados http: https://http.cat/
@@ -12,7 +16,7 @@ router.get("/msg/:id/:code", (req, res)=> {
 
     //Query params en ruta
     const { msg } = req.query;
-
+    
     res.status(200).json({
         msg: msg, 
         id : id,
@@ -20,7 +24,8 @@ router.get("/msg/:id/:code", (req, res)=> {
         name: faker.commerce.productName(),
         price: parseFloat(faker.commerce.price(), 10),
         image: faker.image.imageUrl(),
-        action: "Read"
+        action: "Read",
+        list: elementService.find()
     });
 });
 
