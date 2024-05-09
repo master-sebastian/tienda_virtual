@@ -1,4 +1,5 @@
 const faker = require('faker'); 
+const boom = require("@hapi/boom")
 
 class ElementsService {
     
@@ -40,7 +41,7 @@ class ElementsService {
     update(id, changes){
         const index = this.elements.findIndex(item=>item.id===id);
         if(index === -1){
-            throw new Error('Element not found');
+            throw boom.notFound('Element not found');
         }
         const element = this.elements[index];
         this.elements[index] = {...element,...changes};
@@ -50,7 +51,7 @@ class ElementsService {
     delete(id){
         const index=this.elements.findIndex(item=>item.id===id);
         if(index===-1){
-            throw new Error('Element not found');
+            throw boom.notFound('Element not found');
         }
         this.elements.splice(index,1);return{id};
     }
