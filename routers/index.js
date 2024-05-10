@@ -1,6 +1,6 @@
 const express = require('express');
 
-const serviceExample = require('./service_example.router');
+const serviceExample = require('./elements.router');
 
 module.exports = (app) => {
     const router =  express.Router();
