@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors')
 const whitelist = require("./whitelist");
 const app = express();
-const port =  process.env.PORT;
+const port =  process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -15,7 +15,7 @@ routers(app);
 
 app.use(cors({
     origin:(origin,callback)=>{
-        if(whitelist.includes(origin)){
+        if(whitelist.includes(origin) || !origin){
             callback(null,true);
         }else{
             callback(new Error('no permitido'));
@@ -30,3 +30,5 @@ app.use(errorHandler);
 app.listen(port, ()=>{
     console.log("Server, port: "+port);
 });
+
+module.exports = app;
