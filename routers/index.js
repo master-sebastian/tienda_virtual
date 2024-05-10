@@ -7,4 +7,8 @@ module.exports = (app) => {
     app.use("/api/v1/", router);
     router.use("/elements", serviceExample);
     app.use("/service_example", serviceExample);
+
+    app.use("/", (req, res)=>{
+        res.render("service_example/index")
+    })
 }
