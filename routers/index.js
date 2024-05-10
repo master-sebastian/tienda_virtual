@@ -1,10 +1,10 @@
 const express = require('express');
 
-const servicios1 = require('./servicios1.router');
+const serviceExample = require('./service_example.router');
 
 module.exports = (app) => {
     const router =  express.Router();
-    app.use("/api/v1", router);
-    router.use("/servicios1", servicios1);
-    app.use("/servicios1", servicios1);
+    app.use("/api/v1/", router);
+    router.use("/elements", serviceExample);
+    app.use("/service_example", serviceExample);
 }

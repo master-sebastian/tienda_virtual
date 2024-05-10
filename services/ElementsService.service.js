@@ -16,20 +16,24 @@ class ElementsService {
                 name: faker.commerce.productName(),
                 price: parseInt(faker.commerce.price(), 10),
                 image: faker.image.imageUrl(),
-                isBlock: faker.datatype.boolean(),
+                isBlock: faker.datatype.boolean()
             }); 
         } 
     }
 
-    find() { 
+    async find() { 
         return this.elements; 
     }
 
-    findOne(id) { 
-        return this.elements.find(item => item.id === id); 
+    async findOne(id) {
+        const element = this.elements.find(item => item.id === id);
+        if(element === undefined){
+            return null;
+        }
+        return element; 
     }
 
-    create(data){
+    async create(data){
         const newElement= {
             id:faker.datatype.uuid(), 
             ...data
@@ -38,7 +42,7 @@ class ElementsService {
         return newElement;
     }
 
-    update(id, changes){
+    async update(id, changes){
         const index = this.elements.findIndex(item=>item.id===id);
         if(index === -1){
             throw boom.notFound('Element not found');
@@ -48,7 +52,7 @@ class ElementsService {
         return this.elements[index];
     }
 
-    delete(id){
+    async delete(id){
         const index=this.elements.findIndex(item=>item.id===id);
         if(index===-1){
             throw boom.notFound('Element not found');
