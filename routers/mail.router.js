@@ -1,6 +1,6 @@
 const express = require('express');
-const MailGutiService = require('../services/MailGutiService.service');
-const mailGutiService = new MailGutiService();
+const MailService = require('../services/MailService.service');
+const mailService = new MailService();
 
 const router = express.Router();
 
@@ -16,7 +16,7 @@ router.post("/", async (req, res)=> {
                     <br>
                     <b>Numero de celular/telefono:</b> ${numberPhone}`; 
     const subject = "Servicio smtp perros🤣❤🤣";
-    const response = await mailGutiService.send({from: process.env.SMTP_AUTH_USER, subject, to: email, subject, text: "", html});
+    const response = await mailService.send({from: process.env.SMTP_AUTH_USER, subject, to: email, subject, text: "", html});
     
     if(response === undefined){
         res.status(201).json({msg: "Se no se puedo enviar la información, espero unos segundos y vuelta a intentarlo"});

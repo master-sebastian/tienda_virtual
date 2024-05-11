@@ -1,8 +1,6 @@
 const boom = require("@hapi/boom")
 
-class MailGutiService {
-    
-    constructor() {}
+class MailService {
 
     async send(options) { 
 
@@ -26,4 +24,4 @@ class MailGutiService {
     }
 
 }
-module.exports = MailGutiService;
+module.exports = MailService;
