@@ -6,6 +6,7 @@ const categories = require('./categories.router');
 const aimed_at = require('./aimed_at.router');
 const whatsapp_information = require("./whatsapp_information.router");
 const sizes = require('./sizes.router');
+const products = require('./products.router');
 
 module.exports = (app) => {
     const router =  express.Router();
@@ -16,6 +17,7 @@ module.exports = (app) => {
     router.use("/aimed_at", aimed_at);
     router.use("/whatsapp_information", whatsapp_information);
     router.use("/sizes", sizes);
+    router.use("/products", products);
     router.use("/mail", mail);
 
     app.use("/todos", (req, res)=>{
