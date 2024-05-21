@@ -7,6 +7,7 @@ const aimed_at = require('./aimed_at.router');
 const whatsapp_information = require("./whatsapp_information.router");
 const sizes = require('./sizes.router');
 const products = require('./products.router');
+const auth = require("./auth.router");
 
 module.exports = (app) => {
     const router =  express.Router();
@@ -19,9 +20,21 @@ module.exports = (app) => {
     router.use("/sizes", sizes);
     router.use("/products", products);
     router.use("/mail", mail);
+    router.use("/auth", auth);
 
-    app.use("/todos", (req, res)=>{
-        res.render("service_example/index")
+
+    app.get("/login", (req, res)=>{
+        res.render("login/index")
     })
 
+    app.get("/product", (req, res)=>{
+        res.render("product/create")
+    })
+    app.get("/product_edit", (req, res)=>{
+        res.render("product/edit")
+    })
+
+    app.get("/", (req, res)=>{
+        res.render("index")
+    })
 }

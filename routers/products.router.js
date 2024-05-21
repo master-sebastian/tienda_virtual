@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const ProductsService = require('../services/ProductsService.service');
 const productsService = new ProductsService();
+const { verifyTokeyJWT } = require("./../middlewares/verifyTokeyJWT");
 
 router.get("/", async (req, res)=> {
     const products = await productsService.find();
@@ -20,7 +21,7 @@ router.get("/by_id/:id", async (req, res)=> {
     
 })
 
-router.post("/", async (req, res)=> {
+router.post("/", verifyTokeyJWT, async (req, res)=> {
     const { nombre, codigo, imagen, descripcion, cantidad, categoria_id, talla_id, dirigido_a_id, conctato_whatsapp_id} = req.body
     try{
         const product = await productsService.create({ nombre, codigo, imagen, descripcion, cantidad, categoria_id, talla_id, dirigido_a_id, conctato_whatsapp_id});
@@ -33,7 +34,7 @@ router.post("/", async (req, res)=> {
 })
 
 
-router.put("/:id", async (req, res)=> {
+router.put("/:id", verifyTokeyJWT, async (req, res)=> {
     const { id } = req.params
     const { nombre, codigo, imagen, descripcion, cantidad, categoria_id, talla_id, dirigido_a_id, conctato_whatsapp_id} = req.body
     try{
@@ -46,7 +47,7 @@ router.put("/:id", async (req, res)=> {
     
 })
 
-router.delete("/:id", async (req, res)=> {
+router.delete("/:id", verifyTokeyJWT, async (req, res)=> {
     const { id } = req.params
     try{
         const product = await productsService.delete(id);
